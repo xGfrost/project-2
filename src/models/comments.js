@@ -6,7 +6,7 @@ const createNew = (body) => {
     const SQLQuery = `INSERT INTO comments (id, user_id, blog_id,content)
                         VALUES (?, ?, ?, ?)`;
 
-                        return dbPool.execute(SQLQuery, [id, body.user_id, body.blog_id, content]);
+                        return dbPool.execute(SQLQuery, [id, body.user_id, body.blog_id, body.content]);
 }
 
 module.exports = {
