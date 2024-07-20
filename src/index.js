@@ -10,6 +10,8 @@ const educationRoutes = require('./routes/education');
 
 const adminposRoutes = require('./routes/admin_pos');
 
+const commentsRoutes = require('./routes/comments');
+
 const middlewareLogRequest = require('./middleware/logs');
 
 const upload = require('./middleware/multer');
@@ -45,6 +47,8 @@ app.post('/upload', upload.single('image'), (req, res) => {
         message:err.message
     })
  })
+
+ app.use('/api/comments', upload.none(), commentsRoutes);
 
  app.use('/api/admin_pos', upload.none(), adminposRoutes);
 
