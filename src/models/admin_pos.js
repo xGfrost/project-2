@@ -35,9 +35,9 @@ const deleteadminpos = (id) => {
     return dbPool.execute(SQLQuery, [id]);
 }
 
-const getallsearch = (q) => {
+const getallsearch = (search) => {
     const SQLQuery = 'SELECT * FROM admin_pos WHERE name LIKE ?';
-    const searchParam = `%${q}%`;
+    const searchParam = `%${search}%`;
     return dbPool.execute(SQLQuery, [searchParam])
     .then (([results, fields]) => results);
 }

@@ -47,7 +47,7 @@ const getbyid = (id) => {
                                 WHERE 
                                 blogs.id = ?
                                  `;
-    return dbPool.execute(SQLQuery, [id])
+    return dbPool.execute(SQLQuery, [id]);
 }
 
 const update = (id, body, image) => {
@@ -64,9 +64,9 @@ const deleteblogs = (id) => {
     return dbPool.execute(SQLQuery, [id]);
 }
 
-const getallsearch = (q) => {
+const getallsearch = (search) => {
     const SQLQuery = 'SELECT * FROM blogs WHERE title LIKE ?';
-    const searchParam = `%${q}%`;
+    const searchParam = `%${search}%`;
     return dbPool.execute(SQLQuery, [searchParam])
     .then(([results, fields]) => results);
 }

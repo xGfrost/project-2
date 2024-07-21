@@ -1,10 +1,10 @@
 const adminposModel = require('../models/admin_pos');
 
 const getadminpos = async (req, res) => {
-    const {q} = req.query;
+    const {search} = req.query;
     try{
-        if (q) {
-            const rows = await adminposModel.getallsearch(q);
+        if (search) {
+            const rows = await adminposModel.getallsearch(search);
             res.status(200).json({
                 message: 'Success',
                 data:rows,

@@ -12,7 +12,7 @@ const createNew = (body, image) => {
 }
 
 const getAll = () => {
-    const SQLQuery = 'SELECT * FROM blogs ';
+    const SQLQuery = `SELECT * FROM blogs WHERE type = 'EDUCATION' ` ;
 
     return dbPool.execute(SQLQuery);
 }
@@ -37,12 +37,17 @@ const deleteeducation = (id) => {
     return dbPool.execute(SQLQuery, [id]);
 }
 
-const getallsearch = (q) => {
-    const SQLQuery = 'SELECT * FROM blogs WHERE title LIKE ?';
-    const searchParam = `%${q}%`;
+const getallsearch = (search) => {
+    const SQLQuery = `SELECT * FROM blogs WHERE type = 'EDUCATION' AND title LIKE ?`;
+    const searchParam = `%${search}%`;
     return dbPool.execute(SQLQuery, [searchParam])
-    .then(([results, fields]) => results);
+        .then(([results, fields]) => results);
 }
+
+module.exports = {
+    getallsearch,
+}
+
 
 
 module.exports = {

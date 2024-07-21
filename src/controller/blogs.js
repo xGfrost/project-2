@@ -20,10 +20,10 @@ const createNew = async (req, res) =>{
 }
 
 const getBlogs = async (req, res) => {
-    const { q } = req.query;
+    const { search } = req.query;
     try {
-        if (q) {
-            const rows = await blogsModel.getallsearch(q);
+        if (search) {
+            const rows = await blogsModel.getallsearch(search);
             res.status(200).json({
                 message: 'Success',
                 data: rows,
