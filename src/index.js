@@ -14,6 +14,8 @@ const commentsRoutes = require('./routes/comments');
 
 const cleaningservicesRoutes = require('./routes/cleaning_services');
 
+const wastereportsRoutes = require('./routes/waste_reports');
+
 const middlewareLogRequest = require('./middleware/logs');
 
 const upload = require('./middleware/multer');
@@ -55,6 +57,19 @@ app.post('/upload', upload.single('image'), (req, res) => {
  app.use('/api/admin_pos', upload.none(), adminposRoutes);
  
  app.use('/api/cleaning_services', upload.none(), cleaningservicesRoutes);
+
+app.use('/api/waste_reports', upload.single('image'), wastereportsRoutes);
+app.post('/upload', upload.single('image'), (req, res) => {
+    res.json({
+        data: req.file,
+        message: 'Upload Berhasil'
+    })
+})
+ app.use((err, req, res, next) => {
+    res.json({
+        message:err.message
+    })
+ })
 
  app.listen(PORT, () =>{
     console.log(`Server berhasil di running di port ${PORT}`)
