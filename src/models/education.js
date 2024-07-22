@@ -45,12 +45,6 @@ const getallsearch = (search) => {
 }
 
 module.exports = {
-    getallsearch,
-}
-
-
-
-module.exports = {
     createNew,
     getAll,
     getbyid,
