@@ -17,7 +17,7 @@ const getAll = () => {
     return dbPool.execute(SQLQuery);
 }
 
-const getbyid = (id) => {
+const getbyid = async(id) => {
     const SQLQuery = `SELECT
                         blogs.id AS blogID, 
                         blogs.title, 
@@ -47,7 +47,8 @@ const getbyid = (id) => {
                                 WHERE 
                                 blogs.id = ?
                                  `;
-    return dbPool.execute(SQLQuery, [id]);
+                                 const [rows] = await dbPool.execute(SQLQuery, [id]);
+                                 return rows;
 }
 
 const update = (id, body, image) => {

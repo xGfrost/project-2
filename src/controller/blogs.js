@@ -99,8 +99,16 @@ const getBlogs = async (req, res) => {
 
 const getbyid = async (req, res) => {
     const { id } = req.params;
+    const {userId} = req.query;
+
+    // const { userID } = req.body; // Mendapatkan userID dari body request
+
     try {
-        const [rows] = await blogsModel.getbyid(id);
+        const rows = await blogsModel.getbyid(id);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Blog not found' });
+        }
 
         // Mengorganisir data agar komentar dikelompokkan berdasarkan blog
         const blogData = {
@@ -121,6 +129,7 @@ const getbyid = async (req, res) => {
                     user_id: row.user_id,
                     blog_id: row.blog_id,
                     content: row.content,
+                    isMyComment: row.user_id === userId, // Menandai apakah ini komentar pengguna
                     user: {
                         id: row.userID,
                         name: row.name,
@@ -131,17 +140,11 @@ const getbyid = async (req, res) => {
             }
         });
 
-        res.status(200).json({
-            message: 'success',
-            data: blogData,
-        });
-    } catch (error) {
-        return res.status(400).json({
-            message: error.message,
-            data: null,
-        });
+        res.json(blogData);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
-}
+};
 
 
 const update = async (req, res) => {
