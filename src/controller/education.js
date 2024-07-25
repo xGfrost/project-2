@@ -89,7 +89,7 @@ const update = async (req, res) => {
 
     } catch (error) {
         return res.status(400).json({
-            message: 'Blogs not found',
+            message: error.message,
             data: body,
         })
     }
