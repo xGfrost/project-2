@@ -12,7 +12,7 @@ const createNew = (body, image) => {
 }
 
 const getAll = () => {
-    const SQLQuery = 'SELECT * FROM blogs ';
+    const SQLQuery = `SELECT * FROM blogs WHERE type = 'BLOG'` ;
 
     return dbPool.execute(SQLQuery);
 }
@@ -66,7 +66,7 @@ const deleteblogs = (id) => {
 }
 
 const getallsearch = (search) => {
-    const SQLQuery = 'SELECT * FROM blogs WHERE title LIKE ?';
+    const SQLQuery = `SELECT * FROM blogs WHERE title LIKE ? AND type = 'BLOG'`;
     const searchParam = `%${search}%`;
     return dbPool.execute(SQLQuery, [searchParam])
     .then(([results, fields]) => results);
